@@ -11,7 +11,7 @@ namespace BlockWall.Client
         public MainForm()
         {
             XamlReader.Load(this);
-            Content = new Controls.GameBoard();
+            Content = new Controls.GameBoard(new Size(9,9), new Size(50,50), 10);
         }
     }
 }
