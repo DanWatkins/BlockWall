@@ -3,61 +3,70 @@ using Eto.Forms;
 
 namespace BlockWall.Client.Controls
 {
-    public class GameBoard : Scrollable
+    public class GameBoard : Drawable
     {
         private readonly Size _boardSize;
         private readonly Size _tileSize;
         private readonly int _spacing;
-        private readonly Drawable _drawable;
+		private readonly int _border;
 
-        public GameBoard(Size boardSize, Size tileSize, int spacing)
+        public Color BaseColor { get; set; } = Colors.Black;
+
+        public Color TileColor { get; set; } = Colors.Black;
+
+        public Color GrooveColor { get; set; } = Colors.SaddleBrown;
+
+		public GameBoard(Size boardSize, Size tileSize, int spacing, int border)
         {
             _boardSize = boardSize;
             _tileSize = tileSize;
             _spacing = spacing;
-            _drawable = CreateBoard();
+			_border = border;
 
-            Content = new StackLayout
-            {
-                Spacing = 10,
-                HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                Items = { new StackLayoutItem(_drawable, true) }
-            };
+            CreateBoard();
         }
 
-        private Drawable CreateBoard()
+        private void CreateBoard()
         {
-            var drawable = new Drawable();
-
-            drawable.Paint += (sender, args) =>
+            Paint += (sender, args) =>
             {
-                var rect = new RectangleF(drawable.ClientSize);
+                var rect = new RectangleF(ClientSize);
 
+				int boardWidthPx = _boardSize.Width * (_tileSize.Width + _spacing) - _spacing;
+				int boardHeightPx = _boardSize.Height * (_tileSize.Height + _spacing) - _spacing;
+
+                // draw the base
+				args.Graphics.SaveTransform();
+				args.Graphics.SetClip(new RectangleF(
+					0, 0,
+					boardWidthPx + _border*2,
+					boardHeightPx + _border*2));
+				args.Graphics.FillRectangle(BaseColor, rect);
+
+                //draw the grooves
                 args.Graphics.SaveTransform();
                 args.Graphics.SetClip(new RectangleF(
-                    0, 0,
-                    _boardSize.Width * (_tileSize.Width + _spacing) - _spacing,
-                    _boardSize.Height * (_tileSize.Height + _spacing) - _spacing));
-                args.Graphics.FillRectangle(Color.Parse("Gray"), rect);
+					_border, _border,
+					boardWidthPx,
+					boardHeightPx));
+                args.Graphics.FillRectangle(GrooveColor, rect);
 
+                //draw the tiles
                 for (int w = 0; w < _boardSize.Width; w++)
                 {
                     for (int h = 0; h < _boardSize.Height; h++)
                     {
                         args.Graphics.SetClip(new RectangleF(
-                            w * (_tileSize.Width + _spacing),
-                            h * (_tileSize.Height + _spacing),
+							w * (_tileSize.Width + _spacing) + _border,
+							h * (_tileSize.Height + _spacing) + _border,
                             _tileSize.Width,
                             _tileSize.Height));
-                        args.Graphics.FillRectangle(Color.Parse("White"), rect); 
+                        args.Graphics.FillRectangle(TileColor, rect); 
                     }
                 }
 
-
                 args.Graphics.RestoreTransform();
             };
-
-            return drawable;
         }
     }
 }

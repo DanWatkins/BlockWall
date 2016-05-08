@@ -11,7 +11,19 @@ namespace BlockWall.Client
         public MainForm()
         {
             XamlReader.Load(this);
-            Content = new Controls.GameBoard(new Size(9,9), new Size(50,50), 10);
+
+            MainScrollable.Content = new StackLayout
+            {
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                Items =
+                {
+                    new StackLayoutItem(
+                    new Controls.GameBoard(new Size(9, 7), new Size(50, 50), 10, 30),
+                    true)
+                }
+            };
+            Width = 1024;
+            Height = 768;
         }
     }
 }
