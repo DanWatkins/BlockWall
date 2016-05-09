@@ -42,12 +42,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlockWall.Client\BlockWall.Client.csproj">
-      <Project>{4751A730-2882-4153-BA6E-23E6F9080B04}</Project>
-      <Name>BlockWall.Client</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

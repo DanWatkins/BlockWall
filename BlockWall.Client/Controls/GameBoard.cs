@@ -8,7 +8,7 @@ namespace BlockWall.Client.Controls
         private readonly Size _boardSize;
         private readonly Size _tileSize;
         private readonly int _spacing;
-		private readonly int _border;
+        private readonly int _border;
 
         public Color BaseColor { get; set; } = Colors.Black;
 
@@ -16,39 +16,46 @@ namespace BlockWall.Client.Controls
 
         public Color GrooveColor { get; set; } = Colors.SaddleBrown;
 
-		public GameBoard(Size boardSize, Size tileSize, int spacing, int border)
+        public GameBoard(Size boardSize, Size tileSize, int spacing, int border)
         {
             _boardSize = boardSize;
             _tileSize = tileSize;
             _spacing = spacing;
-			_border = border;
+            _border = border;
 
             CreateBoard();
         }
 
         private void CreateBoard()
         {
+            int boardWidthPx = _boardSize.Width * (_tileSize.Width + _spacing) - _spacing;
+            int boardHeightPx = _boardSize.Height * (_tileSize.Height + _spacing) - _spacing;
+
+            int baseWidthPx = boardWidthPx + _border * 2;
+            int baseHeightPx = boardHeightPx + _border * 2;
+
+            // update control size
+            Width = baseWidthPx;
+            Height = baseHeightPx;
+
             Paint += (sender, args) =>
             {
                 var rect = new RectangleF(ClientSize);
 
-				int boardWidthPx = _boardSize.Width * (_tileSize.Width + _spacing) - _spacing;
-				int boardHeightPx = _boardSize.Height * (_tileSize.Height + _spacing) - _spacing;
-
                 // draw the base
-				args.Graphics.SaveTransform();
-				args.Graphics.SetClip(new RectangleF(
-					0, 0,
-					boardWidthPx + _border*2,
-					boardHeightPx + _border*2));
-				args.Graphics.FillRectangle(BaseColor, rect);
+                args.Graphics.SaveTransform();
+                args.Graphics.SetClip(new RectangleF(
+                        0, 0,
+                        baseWidthPx,
+                        baseHeightPx));
+                args.Graphics.FillRectangle(BaseColor, rect);
 
                 //draw the grooves
                 args.Graphics.SaveTransform();
                 args.Graphics.SetClip(new RectangleF(
-					_border, _border,
-					boardWidthPx,
-					boardHeightPx));
+                        _border, _border,
+                        boardWidthPx,
+                        boardHeightPx));
                 args.Graphics.FillRectangle(GrooveColor, rect);
 
                 //draw the tiles
@@ -57,10 +64,10 @@ namespace BlockWall.Client.Controls
                     for (int h = 0; h < _boardSize.Height; h++)
                     {
                         args.Graphics.SetClip(new RectangleF(
-							w * (_tileSize.Width + _spacing) + _border,
-							h * (_tileSize.Height + _spacing) + _border,
-                            _tileSize.Width,
-                            _tileSize.Height));
+                                w * (_tileSize.Width + _spacing) + _border,
+                                h * (_tileSize.Height + _spacing) + _border,
+                                _tileSize.Width,
+                                _tileSize.Height));
                         args.Graphics.FillRectangle(TileColor, rect); 
                     }
                 }

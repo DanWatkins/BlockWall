@@ -58,4 +58,10 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlockWall\BlockWall.csproj">
+      <Project>{e7c2f298-5c33-4631-aef5-415979fd1ebd}</Project>
+      <Name>BlockWall</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

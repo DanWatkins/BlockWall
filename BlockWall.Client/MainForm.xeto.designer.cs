@@ -9,6 +9,10 @@ namespace BlockWall.Client
 {
     public partial class MainForm
     {
-        private Scrollable MainScrollable { get; set; }
+        private StackLayout GameBoardStackLayout { get; set; }
+
+        private Label OpponentWallsLabel { get; set; }
+
+        private Label PlayerWallsLabel { get; set; }
     }
 }

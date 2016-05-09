@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://schema.picoe.ca/eto.forms" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="My Eto Form" ClientSize="900, 600">
+		<StackLayout HorizontalContentAlignment="Stretch">
+			<Label ID="OpponentWallsLabel" Text="Walls: "/>
+			<StackLayout ID="GameBoardStackLayout" HorizontalContentAlignment="Stretch">
+			</StackLayout>
+			<Label ID="PlayerWallsLabel" Text="Walls: "/>
+		</StackLayout>
+</Form>
