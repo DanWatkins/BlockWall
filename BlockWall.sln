@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
+# Visual Studio 2012
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockWall.Client", "BlockWall.Client\BlockWall.Client.csproj", "{4751A730-2882-4153-BA6E-23E6F9080B04}"
@@ -27,18 +27,20 @@ Global
 		{4751A730-2882-4153-BA6E-23E6F9080B04}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4751A730-2882-4153-BA6E-23E6F9080B04}.Release|x86.ActiveCfg = Release|Any CPU
 		{4751A730-2882-4153-BA6E-23E6F9080B04}.Release|x86.Build.0 = Release|Any CPU
-		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Debug|x86.ActiveCfg = Debug|x86
-		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Debug|x86.Build.0 = Debug|x86
-		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Release|Any CPU.ActiveCfg = Release|x86
-		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Release|x86.ActiveCfg = Release|x86
-		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Release|x86.Build.0 = Release|x86
 		{93B25F11-699E-40FA-A742-23EF005AC5AF}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{93B25F11-699E-40FA-A742-23EF005AC5AF}.Debug|x86.ActiveCfg = Debug|x86
 		{93B25F11-699E-40FA-A742-23EF005AC5AF}.Debug|x86.Build.0 = Debug|x86
 		{93B25F11-699E-40FA-A742-23EF005AC5AF}.Release|Any CPU.ActiveCfg = Release|x86
 		{93B25F11-699E-40FA-A742-23EF005AC5AF}.Release|x86.ActiveCfg = Release|x86
 		{93B25F11-699E-40FA-A742-23EF005AC5AF}.Release|x86.Build.0 = Release|x86
+		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Debug|Any CPU.Build.0 = Debug|x86
+		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Debug|x86.ActiveCfg = Debug|x86
+		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Debug|x86.Build.0 = Debug|x86
+		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Release|Any CPU.ActiveCfg = Release|x86
+		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Release|Any CPU.Build.0 = Release|x86
+		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Release|x86.ActiveCfg = Release|x86
+		{CC8468C5-252E-4E45-9D73-D4DA21E82DAC}.Release|x86.Build.0 = Release|x86
 		{E7C2F298-5C33-4631-AEF5-415979FD1EBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E7C2F298-5C33-4631-AEF5-415979FD1EBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7C2F298-5C33-4631-AEF5-415979FD1EBD}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -47,9 +49,6 @@ Global
 		{E7C2F298-5C33-4631-AEF5-415979FD1EBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7C2F298-5C33-4631-AEF5-415979FD1EBD}.Release|x86.ActiveCfg = Release|Any CPU
 		{E7C2F298-5C33-4631-AEF5-415979FD1EBD}.Release|x86.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
@@ -85,5 +84,8 @@ Global
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

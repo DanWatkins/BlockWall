@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlockWall\BlockWall.csproj">
-      <Project>{e7c2f298-5c33-4631-aef5-415979fd1ebd}</Project>
+      <Project>{E7C2F298-5C33-4631-AEF5-415979FD1EBD}</Project>
       <Name>BlockWall</Name>
     </ProjectReference>
   </ItemGroup>

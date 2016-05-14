@@ -47,4 +47,14 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlockWall.Client\BlockWall.Client.csproj">
+      <Project>{4751A730-2882-4153-BA6E-23E6F9080B04}</Project>
+      <Name>BlockWall.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlockWall\BlockWall.csproj">
+      <Project>{E7C2F298-5C33-4631-AEF5-415979FD1EBD}</Project>
+      <Name>BlockWall</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
