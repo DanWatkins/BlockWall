@@ -5,8 +5,8 @@ namespace BlockWall.Client.Controls
 {
     public class GameBoard : Drawable
     {
-        private readonly Size _boardSize;
-        private readonly Size _tileSize;
+        private readonly Size _boardSizeTiles;
+        private readonly Size _tileSizePx;
         private readonly int _spacing;
         private readonly int _border;
 
@@ -18,8 +18,8 @@ namespace BlockWall.Client.Controls
 
         public GameBoard(Size boardSize, Size tileSize, int spacing, int border)
         {
-            _boardSize = boardSize;
-            _tileSize = tileSize;
+            _boardSizeTiles = boardSize;
+            _tileSizePx = tileSize;
             _spacing = spacing;
             _border = border;
 
@@ -28,8 +28,8 @@ namespace BlockWall.Client.Controls
 
         private void CreateBoard()
         {
-            int boardWidthPx = _boardSize.Width * (_tileSize.Width + _spacing) - _spacing;
-            int boardHeightPx = _boardSize.Height * (_tileSize.Height + _spacing) - _spacing;
+            int boardWidthPx = _boardSizeTiles.Width * (_tileSizePx.Width + _spacing) - _spacing;
+            int boardHeightPx = _boardSizeTiles.Height * (_tileSizePx.Height + _spacing) - _spacing;
 
             int baseWidthPx = boardWidthPx + _border * 2;
             int baseHeightPx = boardHeightPx + _border * 2;
@@ -59,15 +59,15 @@ namespace BlockWall.Client.Controls
                 args.Graphics.FillRectangle(GrooveColor, rect);
 
                 //draw the tiles
-                for (int w = 0; w < _boardSize.Width; w++)
+                for (int w = 0; w < _boardSizeTiles.Width; w++)
                 {
-                    for (int h = 0; h < _boardSize.Height; h++)
+                    for (int h = 0; h < _boardSizeTiles.Height; h++)
                     {
                         args.Graphics.SetClip(new RectangleF(
-                                w * (_tileSize.Width + _spacing) + _border,
-                                h * (_tileSize.Height + _spacing) + _border,
-                                _tileSize.Width,
-                                _tileSize.Height));
+                                w * (_tileSizePx.Width + _spacing) + _border,
+                                h * (_tileSizePx.Height + _spacing) + _border,
+                                _tileSizePx.Width,
+                                _tileSizePx.Height));
                         args.Graphics.FillRectangle(TileColor, rect); 
                     }
                 }
