@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using BlockWall;
 
 namespace BlockWall.Tests
 {
@@ -8,42 +7,69 @@ namespace BlockWall.Tests
     public class BoardTests
     {
         [Test]
-        public void PlaceWallThatBlocksMove1()
+        public void WallIsBlocking1()
         {
-            var board = new Board();
-            board.PlaceWall(new Wall
-            {
-                Position = new Point(2, 2),
-                Orientation = Orientation.Horizontal
-            });
+            AssertWallIsBlocking(
+                new Wall { Position = new Point(1, 1), Orientation = Orientation.Horizontal },
+                new Point(1, 1),
+                new Point(1, 0));
 
-            Assert.IsTrue(board.IsWallBetweenTiles(new Point(3, 2), new Point(3, 1)));
+            AssertWallIsBlocking(
+                new Wall { Position = new Point(1, 1), Orientation = Orientation.Vertical },
+                new Point(1, 1),
+                new Point(0, 1));
+
+            AssertWallIsBlocking(
+                new Wall { Position = new Point(1, 2), Orientation = Orientation.Horizontal },
+                new Point(1, 1),
+                new Point(1, 2));
+
+            AssertWallIsBlocking(
+                new Wall { Position = new Point(2, 1), Orientation = Orientation.Vertical },
+                new Point(1, 1),
+                new Point(2, 1));
         }
 
         [Test]
-        public void PlaceWallThatBlocksMove2()
+        public void WallIsBlocking2()
         {
-            var board = new Board();
-            board.PlaceWall(new Wall
-            {
-                Position = new Point(2, 2),
-                Orientation = Orientation.Vertical
-            });
+            AssertWallIsBlocking(
+                new Wall { Position = new Point(3, 4), Orientation = Orientation.Horizontal },
+                new Point(4, 4),
+                new Point(4, 0));
 
-            Assert.IsFalse(board.IsWallBetweenTiles(new Point(3, 2), new Point(3, 3)));
+            AssertWallIsBlocking(
+                new Wall { Position = new Point(4, 3), Orientation = Orientation.Vertical },
+                new Point(4, 4),
+                new Point(0, 4));
+
+            AssertWallIsBlocking(
+                new Wall { Position = new Point(3, 5), Orientation = Orientation.Horizontal },
+                new Point(4, 4),
+                new Point(4, 5));
+
+            AssertWallIsBlocking(
+                new Wall { Position = new Point(5, 3), Orientation = Orientation.Vertical },
+                new Point(4, 4),
+                new Point(5, 4));
         }
 
-        [Test]
-        public void PlaceWallThatBlocksMove3()
+        private void AssertWallIsBlocking(Wall wall, Point source, Point destination)
+        {
+            Assert.IsTrue(IsWallBlocking(wall, source, destination));
+        }
+
+        private void AssertWallIsNotBlocking(Wall wall, Point source, Point destination)
+        {
+            Assert.IsFalse(IsWallBlocking(wall, source, destination));
+        }
+
+        private bool IsWallBlocking(Wall wall, Point source, Point destination)
         {
             var board = new Board();
-            board.PlaceWall(new Wall
-            {
-                Position = new Point(4, 3),
-                Orientation = Orientation.Vertical
-            });
+            board.PlaceWall(wall);
 
-            Assert.IsTrue(board.IsWallBetweenTiles(new Point(3, 3), new Point(4, 3)));
+            return board.IsWallBetweenTiles(source, destination);
         }
     }
 }

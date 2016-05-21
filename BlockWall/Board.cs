@@ -19,14 +19,18 @@ namespace BlockWall
 
             foreach (var wall in _walls)
             {
-                if (diffX != 0 && wall.Orientation == Orientation.Vertical)
+                if (wall.Orientation == Orientation.Horizontal)
                 {
-                    if (wall.Position.X == tile2.X)
+                    if (diffY > 0 && wall.Position.Y == tile1.Y)
+                        return true;
+                    else if (diffY < 0 && wall.Position.Y == tile2.Y)
                         return true;
                 }
-                else if (diffY != 0 && wall.Orientation == Orientation.Horizontal)
+                else if (wall.Orientation == Orientation.Vertical)
                 {
-                    if (wall.Position.Y == tile1.Y)
+                    if (diffX > 0 && wall.Position.X == tile1.X)
+                        return true;
+                    else if (diffX < 0 && wall.Position.X == tile2.X)
                         return true;
                 }
             }
