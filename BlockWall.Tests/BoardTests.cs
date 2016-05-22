@@ -36,7 +36,7 @@ namespace BlockWall.Tests
             AssertWallIsBlocking(
                 new Wall { Position = new Point(3, 4), Orientation = Orientation.Horizontal },
                 new Point(4, 4),
-                new Point(4, 0));
+                new Point(4, 3));
 
             AssertWallIsBlocking(
                 new Wall { Position = new Point(4, 3), Orientation = Orientation.Vertical },
@@ -52,6 +52,30 @@ namespace BlockWall.Tests
                 new Wall { Position = new Point(5, 3), Orientation = Orientation.Vertical },
                 new Point(4, 4),
                 new Point(5, 4));
+        }
+
+        [Test]
+        public void WallIsNotBlockingHorizontal()
+        {
+            AssertWallIsNotBlocking(
+                new Wall { Position = new Point(0, 4), Orientation = Orientation.Horizontal },
+                new Point(2, 4),
+                new Point(2, 3));
+
+            AssertWallIsNotBlocking(
+                new Wall { Position = new Point(3, 4), Orientation = Orientation.Horizontal },
+                new Point(2, 4),
+                new Point(2, 3));
+
+            AssertWallIsNotBlocking(
+                new Wall { Position = new Point(0, 5), Orientation = Orientation.Horizontal },
+                new Point(2, 4),
+                new Point(2, 5));
+
+            AssertWallIsNotBlocking(
+                new Wall { Position = new Point(3, 5), Orientation = Orientation.Horizontal },
+                new Point(2, 4),
+                new Point(2, 5));
         }
 
         private void AssertWallIsBlocking(Wall wall, Point source, Point destination)
