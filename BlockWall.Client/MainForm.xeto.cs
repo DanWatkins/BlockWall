@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Eto.Forms;
+﻿using BlockWall.Client.Controls;
 using Eto.Drawing;
+using Eto.Forms;
 using Eto.Serialization.Xaml;
 
 namespace BlockWall.Client
@@ -13,7 +12,7 @@ namespace BlockWall.Client
             XamlReader.Load(this);
 
             GameBoardStackLayout.Items.Add(new StackLayoutItem(
-                    new Controls.GameBoard(new Size(9, 7), new Size(50, 50), 10, 30),
+                    new BoardControl(Board.StandardBoard),
                     true));
         }
     }

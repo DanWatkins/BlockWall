@@ -28,7 +28,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Controls\GameBoard.cs" />
+    <Compile Include="Controls\BoardControl.cs" />
     <Compile Include="MainForm.xeto.designer.cs">
       <DependentUpon>MainForm.xeto.cs</DependentUpon>
     </Compile>

@@ -1,11 +1,11 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace BlockWall.Tests
 {
     [TestFixture]
     public class BoardTests
     {
+        #region Tests
         [Test]
         public void WallIsBlocking1()
         {
@@ -36,7 +36,7 @@ namespace BlockWall.Tests
             AssertWallIsBlocking(
                 new Wall { Position = new Point(3, 4), Orientation = Orientation.Horizontal },
                 new Point(4, 4),
-                new Point(4, 3));
+                new Point(4, 0));
 
             AssertWallIsBlocking(
                 new Wall { Position = new Point(4, 3), Orientation = Orientation.Vertical },
@@ -78,20 +78,65 @@ namespace BlockWall.Tests
                 new Point(2, 5));
         }
 
-        private void AssertWallIsBlocking(Wall wall, Point source, Point destination)
+        [Test]
+        public void CanPlaceWallAtPixelPosition_Vertical1()
+        {
+            var board = Board.StandardBoard;
+            var wall = board.CreateWallToInsertAtPixelLocation(85, 40);
+
+            Assert.IsNotNull(wall);
+            AssertEx.AreEqual(new Point(1, 0), wall.Position);
+            Assert.AreEqual(Orientation.Vertical, wall.Orientation);
+        }
+
+        [Test]
+        public void CanPlaceWallAtPixelPosition_Vertical2()
+        {
+            var board = Board.StandardBoard;
+            var wall = board.CreateWallToInsertAtPixelLocation(265, 97);
+
+            Assert.IsNotNull(wall);
+            AssertEx.AreEqual(new Point(4, 1), wall.Position);
+            Assert.AreEqual(Orientation.Vertical, wall.Orientation);
+        }
+
+        [Test]
+        public void CanPlaceWallAtPixelPosition_Horizontal1()
+        {
+            var board = Board.StandardBoard;
+            var wall = board.CreateWallToInsertAtPixelLocation(162, 144);
+
+            Assert.IsNotNull(wall);
+            AssertEx.AreEqual(new Point(2, 2), wall.Position);
+            Assert.AreEqual(Orientation.Horizontal, wall.Orientation);
+        }
+
+        [Test]
+        public void CanPlaceWallAtPixelPosition_Horizontal2()
+        {
+            var board = Board.StandardBoard;
+            var wall = board.CreateWallToInsertAtPixelLocation(410, 265);
+
+            Assert.IsNotNull(wall);
+            AssertEx.AreEqual(new Point(6, 4), wall.Position);
+            Assert.AreEqual(Orientation.Horizontal, wall.Orientation);
+        }
+        #endregion
+
+        private static void AssertWallIsBlocking(Wall wall, Point source, Point destination)
         {
             Assert.IsTrue(IsWallBlocking(wall, source, destination));
         }
 
-        private void AssertWallIsNotBlocking(Wall wall, Point source, Point destination)
+        private static void AssertWallIsNotBlocking(Wall wall, Point source, Point destination)
         {
             Assert.IsFalse(IsWallBlocking(wall, source, destination));
         }
 
-        private bool IsWallBlocking(Wall wall, Point source, Point destination)
+        private static bool IsWallBlocking(Wall wall, Point source, Point destination)
         {
-            var board = new Board();
-            board.PlaceWall(wall);
+            var board = Board.StandardBoard;
+            board.InsertWall(wall);
 
             return board.IsWallBetweenTiles(source, destination);
         }

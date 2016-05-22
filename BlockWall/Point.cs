@@ -1,12 +1,14 @@
-﻿using System;
-
-namespace BlockWall
+﻿namespace BlockWall
 {
     public class Point
     {
         public int X { get; set; }
 
         public int Y { get; set; }
+
+        public Point()
+        {
+        }
 
         public Point(int x, int y)
         {
