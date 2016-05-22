@@ -9,7 +9,7 @@ namespace BlockWall.Client.Ubuntu
 		[STAThread]
 		public static void Main (string[] args)
 		{
-            new Application (Platforms.Gtk2).Run (new BlockWall.Client.MainForm ());
+            new Application (Platforms.Gtk2).Run (new MainForm ());
 		}
 	}
 }

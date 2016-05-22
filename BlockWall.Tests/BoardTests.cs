@@ -1,6 +1,4 @@
-﻿using System;
-using NUnit.Framework;
-using Eto.Drawing;
+﻿using NUnit.Framework;
 
 namespace BlockWall.Tests
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BlockWall
+﻿namespace BlockWall
 {
     public enum Orientation
     {

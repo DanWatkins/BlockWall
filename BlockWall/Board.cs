@@ -1,12 +1,12 @@
-﻿using Eto.Drawing;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Eto.Drawing;
 
 namespace BlockWall
 {
     public class Board
     {
-        private List<Wall> _walls = new List<Wall>();
+        private readonly List<Wall> _walls = new List<Wall>();
 
         /// <summary>
         /// Size in tile units of the rectangular board.
@@ -50,19 +50,22 @@ namespace BlockWall
 
             foreach (var wall in _walls)
             {
-                if (wall.Orientation == Orientation.Horizontal)
+                switch (wall.Orientation)
                 {
-                    if (diffY > 0 && wall.Position.Y == tile1.Y)
-                        return true;
-                    else if (diffY < 0 && wall.Position.Y == tile2.Y)
-                        return true;
-                }
-                else if (wall.Orientation == Orientation.Vertical)
-                {
-                    if (diffX > 0 && wall.Position.X == tile1.X)
-                        return true;
-                    else if (diffX < 0 && wall.Position.X == tile2.X)
-                        return true;
+                    case Orientation.Horizontal:
+                        if (diffY > 0 && wall.Position.Y == tile1.Y)
+                            return true;
+                        if (diffY < 0 && wall.Position.Y == tile2.Y)
+                            return true;
+                        break;
+                    case Orientation.Vertical:
+                        if (diffX > 0 && wall.Position.X == tile1.X)
+                            return true;
+                        if (diffX < 0 && wall.Position.X == tile2.X)
+                            return true;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
 
@@ -75,28 +78,25 @@ namespace BlockWall
             var hunkSize = TileSize + GrooveThickness;
 
             //check for vertical grooves
-            if ((relativePosition.X % hunkSize.Width) - TileSize.Width > 0)
+            if ((relativePosition.X%hunkSize.Width) - TileSize.Width > 0)
             {
                 return new Wall
                 {
-                    Orientation = Orientation.Vertical,
-                    Position = new Point
+                    Orientation = Orientation.Vertical, Position = new Point
                     {
-                        X = (relativePosition.X / hunkSize.Width) + 1,
-                        Y = relativePosition.Y / hunkSize.Height
+                        X = (relativePosition.X/hunkSize.Width) + 1, Y = relativePosition.Y/hunkSize.Height
                     }
                 };
             }
+
             //check for horizontal grooves
-            else if ((relativePosition.Y % hunkSize.Height) - TileSize.Height > 0)
+            if ((relativePosition.Y%hunkSize.Height) - TileSize.Height > 0)
             {
                 return new Wall
                 {
-                    Orientation = Orientation.Horizontal,
-                    Position = new Point
+                    Orientation = Orientation.Horizontal, Position = new Point
                     {
-                        X = relativePosition.X / hunkSize.Width,
-                        Y = (relativePosition.Y / hunkSize.Height) + 1
+                        X = relativePosition.X/hunkSize.Width, Y = (relativePosition.Y/hunkSize.Height) + 1
                     }
                 };
             }

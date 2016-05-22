@@ -1,13 +1,8 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlockWall.Tests
 {
-    class AssertEx
+    internal class AssertEx
     {
         public static void AreEqual(Point expected, Point actual)
         {
