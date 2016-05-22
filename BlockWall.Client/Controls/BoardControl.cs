@@ -3,20 +3,20 @@ using Eto.Forms;
 
 namespace BlockWall.Client.Controls
 {
-    public class GameBoard : Drawable
+    public class BoardControl : Drawable
     {
         private readonly Size _boardSizeTiles;
         private readonly Size _tileSizePx;
         private readonly int _spacing;
         private readonly int _border;
 
-        public Color BaseColor { get; set; } = Colors.Black;
+        public Color BaseColor { get; set; } = Colors.Blue;
 
         public Color TileColor { get; set; } = Colors.Black;
 
         public Color GrooveColor { get; set; } = Colors.SaddleBrown;
 
-        public GameBoard(Size boardSize, Size tileSize, int spacing, int border)
+        public BoardControl(Size boardSize, Size tileSize, int spacing, int border)
         {
             _boardSizeTiles = boardSize;
             _tileSizePx = tileSize;

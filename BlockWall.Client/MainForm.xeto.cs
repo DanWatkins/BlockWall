@@ -13,7 +13,7 @@ namespace BlockWall.Client
             XamlReader.Load(this);
 
             GameBoardStackLayout.Items.Add(new StackLayoutItem(
-                    new Controls.GameBoard(new Size(9, 7), new Size(50, 50), 10, 30),
+                    new Controls.BoardControl(new Size(9, 7), new Size(50, 50), 10, 30),
                     true));
         }
     }
