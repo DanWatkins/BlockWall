@@ -65,10 +65,14 @@ namespace BlockWall
                         }
                         break;
                     case Orientation.Vertical:
-                        if (diffX > 0 && wall.Position.X == tile1.X)
-                            return true;
-                        else if (diffX < 0 && wall.Position.X == tile2.X)
-                            return true;
+                        if (wall.Position.Y >= tile1.Y-(wallLength-1) && wall.Position.Y <= tile1.Y)
+                        {
+                            if (diffX > 0 && wall.Position.X == tile1.X ||
+                                diffX < 0 && wall.Position.X == tile2.X)
+                            {
+                                return true;
+                            }
+                        }
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

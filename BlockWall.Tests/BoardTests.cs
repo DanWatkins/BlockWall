@@ -79,6 +79,30 @@ namespace BlockWall.Tests
         }
 
         [Test]
+        public void WallIsNotBlockingVertical()
+        {
+            AssertWallIsNotBlocking(
+                new Wall { Position = new Point(3, 1), Orientation = Orientation.Vertical },
+                new Point(3, 3),
+                new Point(2, 3));
+
+            AssertWallIsNotBlocking(
+                new Wall { Position = new Point(4, 1), Orientation = Orientation.Vertical },
+                new Point(3, 3),
+                new Point(2, 3));
+
+            AssertWallIsNotBlocking(
+                new Wall { Position = new Point(3, 4), Orientation = Orientation.Vertical },
+                new Point(3, 3),
+                new Point(4, 3));
+
+            AssertWallIsNotBlocking(
+                new Wall { Position = new Point(4, 4), Orientation = Orientation.Vertical },
+                new Point(3, 3),
+                new Point(4, 3));
+        }
+
+        [Test]
         public void CanPlaceWallAtPixelPosition_Vertical1()
         {
             var board = Board.StandardBoard;
