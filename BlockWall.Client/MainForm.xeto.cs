@@ -11,8 +11,30 @@ namespace BlockWall.Client
         {
             XamlReader.Load(this);
 
+            var board = Board.StandardBoard;
+            board.InsertWall(new Wall
+            {
+                TilePosition = new Point(1, 2),
+                Orientation = Orientation.Horizontal
+            });
+            board.InsertWall(new Wall
+            {
+                TilePosition = new Point(2, 2),
+                Orientation = Orientation.Horizontal
+            });
+            board.InsertWall(new Wall
+            {
+                TilePosition = new Point(3, 2),
+                Orientation = Orientation.Vertical
+            });
+            board.InsertWall(new Wall
+            {
+                TilePosition = new Point(3, 3),
+                Orientation = Orientation.Horizontal
+            });
+
             GameBoardStackLayout.Items.Add(new StackLayoutItem(
-                    new BoardControl(Board.StandardBoard),
+                    new BoardControl(board),
                     true));
         }
     }

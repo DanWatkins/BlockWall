@@ -1,4 +1,5 @@
-﻿using Eto.Drawing;
+﻿using System;
+using Eto.Drawing;
 using Eto.Forms;
 
 namespace BlockWall.Client.Controls
@@ -7,11 +8,11 @@ namespace BlockWall.Client.Controls
     {
         private readonly Board _board;
 
-        public Color BaseColor { get; set; } = Colors.Blue;
+        public Color BaseColor { get; set; } = Colors.Black;
 
         public Color TileColor { get; set; } = Colors.Black;
 
-        public Color GrooveColor { get; set; } = Colors.SaddleBrown;
+        public Color GrooveColor { get; set; } = Colors.Gray;
 
         public BoardControl(Board board)
         {
@@ -64,6 +65,33 @@ namespace BlockWall.Client.Controls
                                 _board.TileSize.Height));
                         args.Graphics.FillRectangle(TileColor, rect); 
                     }
+                }
+
+                //draw the walls
+                foreach (var wall in _board.Walls)
+                {
+                    float width = 0.0f;
+                    float height = 0.0f;
+
+                    switch (wall.Orientation)
+                    {
+                        case Orientation.Horizontal:
+                            width = _board.TileSize.Width;
+                            height = _board.GrooveThickness;
+                            break;
+                        case Orientation.Vertical:
+                            width = _board.GrooveThickness;
+                            height = _board.TileSize.Height;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+
+                    var pixelPosition = _board.GetPixelPositionOfWall(wall);
+                    args.Graphics.SetClip(new RectangleF(
+                        pixelPosition.X, pixelPosition.Y,
+                        width, height));
+                    args.Graphics.FillRectangle(Colors.SaddleBrown, rect);
                 }
 
                 args.Graphics.RestoreTransform();
