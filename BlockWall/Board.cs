@@ -38,6 +38,8 @@ namespace BlockWall
 
         public static Board StandardBoard => new Board(new Size(9, 9), new Size(50, 50), 10, 30);
 
+        public IEnumerable<Wall> Walls => _walls;
+
         public void InsertWall(Wall wall)
         {
             _walls.Add(wall);
@@ -55,20 +57,20 @@ namespace BlockWall
                 switch (wall.Orientation)
                 {
                     case Orientation.Horizontal:
-                        if (wall.Position.X >= tile1.X-(wallLength-1) && wall.Position.X <= tile1.X)
+                        if (wall.TilePosition.X >= tile1.X - (wallLength - 1) && wall.TilePosition.X <= tile1.X)
                         {
-                            if ((diffY > 0 && wall.Position.Y == tile1.Y) ||
-                                (diffY < 0 && wall.Position.Y == tile2.Y))
+                            if ((diffY > 0 && wall.TilePosition.Y == tile1.Y) ||
+                                (diffY < 0 && wall.TilePosition.Y == tile2.Y))
                             {
                                 return true;
                             }
                         }
                         break;
                     case Orientation.Vertical:
-                        if (wall.Position.Y >= tile1.Y-(wallLength-1) && wall.Position.Y <= tile1.Y)
+                        if (wall.TilePosition.Y >= tile1.Y - (wallLength - 1) && wall.TilePosition.Y <= tile1.Y)
                         {
-                            if (diffX > 0 && wall.Position.X == tile1.X ||
-                                diffX < 0 && wall.Position.X == tile2.X)
+                            if (diffX > 0 && wall.TilePosition.X == tile1.X ||
+                                diffX < 0 && wall.TilePosition.X == tile2.X)
                             {
                                 return true;
                             }
@@ -88,30 +90,62 @@ namespace BlockWall
             var hunkSize = TileSize + GrooveThickness;
 
             //check for vertical grooves
-            if ((relativePosition.X%hunkSize.Width) - TileSize.Width > 0)
+            if ((relativePosition.X % hunkSize.Width) - TileSize.Width > 0)
             {
                 return new Wall
                 {
-                    Orientation = Orientation.Vertical, Position = new Point
+                    Orientation = Orientation.Vertical,
+                    TilePosition = new Point
                     {
-                        X = (relativePosition.X/hunkSize.Width) + 1, Y = relativePosition.Y/hunkSize.Height
+                        X = (relativePosition.X / hunkSize.Width) + 1,
+                        Y = relativePosition.Y / hunkSize.Height
                     }
                 };
             }
 
             //check for horizontal grooves
-            if ((relativePosition.Y%hunkSize.Height) - TileSize.Height > 0)
+            if ((relativePosition.Y % hunkSize.Height) - TileSize.Height > 0)
             {
                 return new Wall
                 {
-                    Orientation = Orientation.Horizontal, Position = new Point
+                    Orientation = Orientation.Horizontal,
+                    TilePosition = new Point
                     {
-                        X = relativePosition.X/hunkSize.Width, Y = (relativePosition.Y/hunkSize.Height) + 1
+                        X = relativePosition.X / hunkSize.Width,
+                        Y = (relativePosition.Y / hunkSize.Height) + 1
                     }
                 };
             }
 
             return null;
+        }
+
+        public Point GetPixelPositionOfWall(Wall wall)
+        {
+            switch (wall.Orientation)
+            {
+                case Orientation.Horizontal:
+                {
+                    return new Point(
+                        BorderThickness
+                        + wall.TilePosition.X * (TileSize.Width + GrooveThickness),
+                        BorderThickness
+                        + (wall.TilePosition.Y * TileSize.Height)
+                        + (wall.TilePosition.Y -1) * GrooveThickness);
+                }
+                case Orientation.Vertical:
+                    {
+                        return new Point(
+                            BorderThickness
+                            + (wall.TilePosition.X * TileSize.Width)
+                            + (wall.TilePosition.X - 1) * GrooveThickness,
+                            BorderThickness
+                            + wall.TilePosition.Y * (TileSize.Height + GrooveThickness));
+                    }
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
         }
     }
 }
