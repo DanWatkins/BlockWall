@@ -1,6 +1,6 @@
 ﻿using Eto.Forms;
 
-namespace BlockWall.Client
+namespace BlockWall.Client.Desktop
 {
     public partial class MainForm
     {

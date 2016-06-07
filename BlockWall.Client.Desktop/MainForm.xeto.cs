@@ -1,9 +1,10 @@
-﻿using BlockWall.Client.Controls;
+﻿using BlockWall;
+using BlockWall.Client.Desktop.Controls;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.Serialization.Xaml;
 
-namespace BlockWall.Client
+namespace BlockWall.Client.Desktop
 {
     public partial class MainForm : Form
     {

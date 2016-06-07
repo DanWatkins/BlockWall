@@ -2,7 +2,7 @@
 using Eto;
 using Eto.Forms;
 
-namespace BlockWall.Client.Ubuntu
+namespace BlockWall.Client.Desktop.Gtk2
 {
 	public class Program
 	{

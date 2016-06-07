@@ -2,7 +2,7 @@
 using Eto.Drawing;
 using Eto.Forms;
 
-namespace BlockWall.Client.Controls
+namespace BlockWall.Client.Desktop.Controls
 {
     public class BoardControl : Drawable
     {
